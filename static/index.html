@@ -167,16 +167,40 @@
 
             function Trigger(e) {
                 var o = {};
+
+                o.pageXY = [];
+                o.touchID = [];
+
+                if (e.originalEvent.changedTouches != undefined) {
+                for (var i=0; i < e.originalEvent.changedTouches.length; i++) {
+                  if (e.originalEvent.changedTouches.length > 0
+                      && e.originalEvent.changedTouches[i].pageX != undefined
+                      && e.originalEvent.changedTouches[i].pageY != undefined) {
+                      o.pageXY[i]   = [e.originalEvent.changedTouches[i].pageX,
+                                       e.originalEvent.changedTouches[i].pageY];
+                      o.touchID[i] = e.originalEvent.changedTouches[i].identifier;
+                    }
+                  }
+                }
+
+                if (o.touchID.length == 0) {
+                  delete o.touchID;
+                }
+
                 o.metaKey = e.metaKey;
                 o.type    = e.type;
+
                 if (e.pageXY != undefined) {
-                    o.pageXY = e.pageXY;
+                    o.pageXY[0] = e.pageXY;
                 }
                 if (e.pageX != undefined && e.pageY != undefined) {
-                    o.pageXY = [e.pageX,e.pageY];
+                    o.pageXY[0] = [e.pageX,e.pageY];
                 }
                 if (e.which != undefined) {
-                    o.which = e.which;
+                  o.which = e.which;
+                }
+                if (o.pageXY.length == 0) {
+                  delete o.pageXY;
                 }
                 jsb.event(o);
             }

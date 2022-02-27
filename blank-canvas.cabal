@@ -40,6 +40,7 @@ Build-type:          Simple
 Stability:           Beta
 Extra-source-files:  README.md
                      Changelog.md
+                     static/index.html
 Cabal-version:       >= 1.10
 tested-with:         GHC == 8.4.4
                    , GHC == 8.6.5

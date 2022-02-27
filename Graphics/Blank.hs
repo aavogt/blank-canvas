@@ -174,6 +174,7 @@ module Graphics.Blank
         , wait
         , flush
         , Event(..)
+        , Touch(..)
         , EventName
         , EventQueue
         -- ** Cursor manipulation
